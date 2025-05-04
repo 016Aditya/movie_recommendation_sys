@@ -18,9 +18,9 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [movieList, setMovieList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchMovies = async () => {
+  const fetchMovies = async (query = '') => {
     setIsLoading(true);
     setErrorMessage("");
 
@@ -47,13 +47,13 @@ const App = () => {
       console.error(`Error Fetching Movies: ${error}`);
       setErrorMessage("Error Fetching Movies. Please Try again Later!");
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    fetchMovies(searchTerm);
+  }, [searchTerm]);
 
   return (
     <main>
